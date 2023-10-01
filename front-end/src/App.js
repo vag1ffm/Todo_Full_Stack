@@ -1,10 +1,15 @@
 import React from 'react';
+import './App.css';
+import RoutesComp from "./components/route";
+
 
 const App = () => {
+
+
     return (
-        <div>
-            aaaa
-        </div>
+        <>
+          <RoutesComp/>
+        </>
     );
 };
 
