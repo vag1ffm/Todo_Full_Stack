@@ -22,12 +22,13 @@ const Login = () => {
     const {isLoading, status} = useSelector(state => state.authSlice)
 
 
-
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    console.log(status)
 
     useEffect(() => {
         status === 1 && navigate('/')
+        console.log(status)
     }, [status])
 
 

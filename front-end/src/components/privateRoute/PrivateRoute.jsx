@@ -13,18 +13,14 @@ const PrivateRoute = () => {
 
     let isAuth = checkAuth(dispatch)
 
-    console.log(isAuth)
 
     useEffect(() => {
-        console.log('isAuth', isAuth)
         if (!isAuth) {
             return navigate('/welcome')
         } else {
             dispatch(GetUserDataAxios())
             dispatch(GetTodoGroupsAxios())
         }
-
-
     }, [status])
 
     return (

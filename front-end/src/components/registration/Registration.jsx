@@ -24,9 +24,9 @@ const Registration = () => {
         dispatch(RegisterationAxios(data))
     };
 
-    const {status} = useSelector(state => state.userSlice)
+    const {status} = useSelector(state => state.authSlice)
     const navigate = useNavigate()
-    
+
     useEffect(()=>{
         status === 1 && navigate('/')
     }, [status])
