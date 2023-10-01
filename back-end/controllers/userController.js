@@ -65,8 +65,45 @@ class UserController {
             console.error('Ошибка при попытке входа:', e);
             return res.status(500).json({error: 'Произошла ошибка при попытке входа'});
         }
+    }
 
+    async logout(req, res) {
+        try {
+            const {id} = req
 
+            const existingUser = await Token.findOne({where: {user_id: id}})
+            console.log(existingUser)
+            if (!!existingUser) {
+                return res.status(200).json({error: 'Пользователь с таким именем не существует'});
+            }
+
+            await Token.destroy({where: {user_id: id}})
+            res.status(200).json({data: 'done'})
+
+        } catch (e) {
+            console.error('Ошибка при логауте:', e);
+            res.status(200).json({ error: 'Ошибка при выполнении логаута' });
+        }
+    }
+
+    async getUserInfo(req, res) {
+        try {
+            const {id} = req
+
+            const existingUser = await User.findOne({where: {id}})
+            if (!existingUser) {
+                return res.status(400).json({error: 'Пользователь с таким именем уже существует'});
+            }
+
+            return res.status(201).json({
+                id: existingUser.id,
+                username: existingUser.username,
+                email: existingUser.email
+            });
+        } catch (e) {
+            console.error('Ошибка при получении информации о пользователе:', e);
+            return res.status(500).json({ error: 'Произошла ошибка на сервере' });
+        }
     }
 }
 

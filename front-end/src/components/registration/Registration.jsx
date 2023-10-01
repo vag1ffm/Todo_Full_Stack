@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {Button, Modal} from "react-bootstrap";
+import { Modal} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {RegisterationAxios} from "../../store/reducer/Authorization/axios";

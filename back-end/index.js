@@ -2,7 +2,7 @@ const express = require('express')
 const {json} = require("express");
 const cors = require('cors'); // Импортируйте пакет cors
 
-const userRouter = require('./Routes/authRouter')
+const authRouter = require('./Routes/authRouter')
 
 const sequelize = require('./config/database');
 const User = require('./models/Users');
@@ -15,7 +15,7 @@ async function initDatabase() {
         console.error('Ошибка при инициализации базы данных:', error);
     }
 }
-initDatabase()
+// initDatabase()
 
 
 
@@ -28,7 +28,7 @@ app.use(json())
 app.use(cors());
 
 
-app.use('/api/auth', userRouter )
+app.use('/api/auth', authRouter )
 
 
 app.listen(PORT, ()=> {

@@ -48,13 +48,13 @@ export const LogoutAxios = createAsyncThunk(
             }
             await httpClient.LogoutPost(parameters).then(() => {
                 localStorage.removeItem('authToken')
-                // dispatch(statusReset())
+               // dispatch(statusReset())
                 dispatch(logoutUser())
                 dispatch(logoutAuth())
 
             })
         } catch (e) {
-            console.log(rejectWithValue)
+            console.log(e)
         }
     }
 );
