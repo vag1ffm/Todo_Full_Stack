@@ -17,6 +17,7 @@ export const authSlice = createSlice({
         logoutAuth: () => initialState,
 
     },
+
     extraReducers: (reducerChanger) => {
         reducerChanger.addCase(LoginAxios.pending, (state) => {
             state.status = 0;

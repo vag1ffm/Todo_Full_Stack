@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Container } from 'react-bootstrap';
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {CreateTodoGroupAxios} from "../../store/reducer/todo/axios";
+import {useNavigate} from "react-router-dom";
 
 
 const CreateGroup = () => {
@@ -15,12 +16,22 @@ const CreateGroup = () => {
         group_password: yup.string()
     })
 
+    const {status} = useSelector(state => state.todoSlice)
+    const navigate = useNavigate()
+    console.log(status)
+
+
+    useEffect(()=> {
+        status === 1 && navigate('/')
+    }, [status])
+
     const {handleSubmit, register, formState: {errors}} = useForm({
         resolver: yupResolver(schema)
     })
     const dispatch = useDispatch()
 
     const onSubmit = (data) => {
+        console.log(data)
         dispatch(CreateTodoGroupAxios(data))
     }
 
@@ -30,7 +41,7 @@ const CreateGroup = () => {
 
             <form onSubmit={handleSubmit(onSubmit)} className={'col-9'}>
                 <div className="form-group">
-                    <label>Group password</label>
+                    <label>Group name</label>
                     <input type="text" className="form-control" {...register('group_title')} />
                     {errors.group_title && <p>{errors.group_title.message}</p>}
                 </div>

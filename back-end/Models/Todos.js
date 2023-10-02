@@ -2,11 +2,11 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Todos = sequelize.define('Todos', {
-    todo_name: {
+    todo_title: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    group_id: {
+    todo_group_id: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -14,10 +14,10 @@ const Todos = sequelize.define('Todos', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    complited: {
-        type: DataTypes.STRING,
+    todo_is_complete: {
+        type: DataTypes.NUMBER,
         allowNull: false,
-        defaultValue: false,
+        defaultValue: 0,
     }
 });
 

@@ -92,7 +92,7 @@ class UserController {
 
             const existingUser = await User.findOne({where: {id}})
             if (!existingUser) {
-                return res.status(400).json({error: 'Пользователь с таким именем уже существует'});
+                return res.status(400).json({error: 'Пользователь с таким именем нет существует'});
             }
 
             return res.status(201).json({

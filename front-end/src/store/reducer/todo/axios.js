@@ -1,6 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import httpClient from "../../../server/httpClient";
-import {error, getGroupMembers, getTodoGroups, getTodos, loading} from "./todoSlice";
+import {error, getGroupMembers, getTodoGroups, getTodos, loading, statusReset, todoSlice} from "./todoSlice";
+import {logDOM} from "@testing-library/react";
 
 
 export const CreateTodoGroupAxios = createAsyncThunk(
@@ -14,6 +15,7 @@ export const CreateTodoGroupAxios = createAsyncThunk(
             }
 
             httpClient.generalPost(parameters).then(res => {
+                dispatch(statusReset())
             })
         } catch (e) {
             console.log(rejectWithValue)
@@ -42,6 +44,7 @@ export const GetTodosAxios = createAsyncThunk(
     "user/loginSlice",
     (payload, {dispatch, rejectWithValue}) => {
         try {
+            console.log(9)
             let parameters = {
                 url: `/api/todos/?group_id=${payload}`,
             }
@@ -67,6 +70,7 @@ export const AddTodosAxios = createAsyncThunk(
                 url: `/api/todos/`,
                 payload
             }
+            console.log(parameters)
 
             httpClient.generalPost(parameters).then(res => {
 

@@ -3,6 +3,8 @@ const {json} = require("express");
 const cors = require('cors'); // Импортируйте пакет cors
 
 const authRouter = require('./Routes/authRouter')
+const groupRouter = require('./Routes/groupRouter')
+const todoRouter = require('./Routes/todoRouter')
 
 const sequelize = require('./config/database');
 const User = require('./models/Users');
@@ -29,6 +31,8 @@ app.use(cors());
 
 
 app.use('/api/auth', authRouter )
+app.use('/api/groups', groupRouter )
+app.use('/api/todos', todoRouter )
 
 
 app.listen(PORT, ()=> {

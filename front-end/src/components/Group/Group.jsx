@@ -19,6 +19,7 @@ const Group = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    console.log(todos)
 
     const schema = yup.object().shape({
         todo_title: yup.string()
@@ -43,7 +44,7 @@ const Group = () => {
 
     useEffect(() => {
         dispatch(GetTodosAxios(group_id))
-        dispatch(GetTodoMembersAxios(group_id))
+        // dispatch(GetTodoMembersAxios(group_id))
 
     }, [])
 
