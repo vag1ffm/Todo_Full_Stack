@@ -19,6 +19,7 @@ todoRouter.use((req, res, next) => {
 todoRouter.get('/', todoController.getTodos)
 todoRouter.post('/', todoController.create)
 todoRouter.put('/:id', todoController.change)
+todoRouter.delete('/:id', todoController.delete)
 
 
 module.exports = todoRouter

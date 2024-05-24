@@ -1,41 +1,47 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import httpClient from "../../../server/httpClient";
-import {logoutUser} from "../user/userSlice";
-import {authSlice, haveAuthorizated, logoutAuth} from "./authSlice";
+import {error, logoutUser} from "../user/userSlice";
+import {haveAuthorizated, logoutAuth} from "./authSlice";
 
 export const LoginAxios = createAsyncThunk(
     "auth/loginSlice",
     async (payload, {dispatch, rejectWithValue}) => {
         try {
-            console.log(payload)
             let parameters = {
                 url: '/api/auth/token/login/',
                 payload,
             }
-            let res = await httpClient.post(parameters)
-            localStorage.setItem('authToken', res.data.auth_token)
-            
-
+            await httpClient.post(parameters).then(res => {
+                console.log(res)
+                // if (res?.response?.status === 400) {
+                // } else {
+                dispatch(haveAuthorizated())
+                localStorage.setItem('authToken', res.data.auth_token)
+                // }
+            })
         } catch (e) {
-            console.log(rejectWithValue)
+            dispatch(error(e.response.data.error))
+
+            console.log(e)
         }
     }
 );
 
 export const RegisterationAxios = createAsyncThunk(
     "auth/Registration",
-    (payload, {dispatch, rejectWithValue}) => {
+    async (payload, {dispatch, rejectWithValue}) => {
         try {
-
             let parameters = {
                 url: '/api/auth/users/',
                 payload,
             }
-            httpClient.post(parameters).then(res => {
+            await httpClient.post(parameters).then(() => {
                 dispatch(LoginAxios(payload))
             })
+
         } catch (e) {
-            console.log(rejectWithValue)
+            dispatch(error(e.response.data.error))
+            console.log(e)
         }
     }
 );
@@ -48,7 +54,7 @@ export const LogoutAxios = createAsyncThunk(
             }
             await httpClient.LogoutPost(parameters).then(() => {
                 localStorage.removeItem('authToken')
-               // dispatch(statusReset())
+                // dispatch(statusReset())
                 dispatch(logoutUser())
                 dispatch(logoutAuth())
 

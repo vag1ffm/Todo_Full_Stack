@@ -63,6 +63,24 @@ class todoController {
             res.status(500).json('Internal Server Error');
         }
     }
+
+    async delete(req, res) {
+        try {
+            const {id} = req.params
+
+            const existingTodo = await Todos.findByPk(id)
+            if (!existingTodo) {
+                return res.status(400).json('Wrong id of todo')
+            }
+
+            await existingTodo.destroy()
+
+            return res.status(200).json('Todo was deleted successfully');
+        }  catch (e) {
+            console.error(e);
+            res.status(500).json('Internal Server Error');
+        }
+    }
 }
 
 module.exports = new todoController()

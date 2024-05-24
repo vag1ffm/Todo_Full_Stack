@@ -30,6 +30,7 @@ app.use(json())
 app.use(cors());
 
 
+
 app.use('/api/auth', authRouter )
 app.use('/api/groups', groupRouter )
 app.use('/api/todos', todoRouter )

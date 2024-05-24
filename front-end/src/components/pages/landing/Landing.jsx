@@ -5,8 +5,19 @@ import {useDispatch, useSelector} from "react-redux";
 import {routes} from "../../../urls/urls";
 import {useNavigate} from "react-router-dom";
 import login from "../../login";
+import Notification from "../../notification";
 
 const LandingPage = () => {
+    const {error} = useSelector(state => state.userSlice)
+
+    useEffect(()=> {
+        if (error) {
+            setNotificationMessage(error);
+            handleShowNotification()
+        }
+    }, [error])
+
+
     const [showModal, setShowModal] = useState(false);
     const [action, setAction] = useState('');
 
@@ -20,11 +31,29 @@ const LandingPage = () => {
     };
 
 
+    const [showNotification, setShowNotification] = useState(false);
+    const [notificationMessage, setNotificationMessage] = useState('');
+     function handleShowNotification() {
+        setShowNotification(true);
+    }
+
+     function handleCloseNotification() {
+        setShowNotification(false);
+    }
+
+
 
 
 
     return (
         <div className="landing-page">
+
+            <Notification
+                show={showNotification}
+                onClose={handleShowNotification}
+                message={notificationMessage}
+            />
+
             <Navbar bg="light" expand="lg">
                 <Container>
                     <Navbar.Brand href="/">Todo App</Navbar.Brand>

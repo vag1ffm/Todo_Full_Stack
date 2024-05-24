@@ -24,7 +24,7 @@ export const authSlice = createSlice({
             state.isLoading = true;
         });
         reducerChanger.addCase(LoginAxios.fulfilled, (state) => {
-            state.status = 1;
+            // state.status = 1;
             state.isLoading = false;
         });
         reducerChanger.addCase(LoginAxios.rejected, (state) => {

@@ -15,10 +15,11 @@ class HttpClient {
                 'Content-Type': 'application/json',
             }
         };
-
         return axiosInstance
             .post(url, payload, options)
             .then(res => res)
+            // .catch(err => err)
+
     };
 
     generalPost(parameters) {

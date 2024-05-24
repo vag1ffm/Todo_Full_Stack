@@ -19,17 +19,14 @@ export const todoSlice = createSlice({
         getTodoGroups(state, {payload}){
             state.status = 0
             state.isLoading = false
-            state.error = false
             state.groups = payload
         },
         getTodos(state, {payload}) {
             state.isLoading = false
-            state.error = false
             state.todos = payload
         },
         getGroupMembers(state, {payload}) {
             state.isLoading = false
-            state.error = false
             state.members = payload
         },
         statusReset(state) {
@@ -39,12 +36,11 @@ export const todoSlice = createSlice({
 
         loading(state) {
             state.isLoading = true
-            state.error = false
 
         },
-        error(state) {
+        error(state, {payload}) {
             state.isLoading = false
-            state.error = true
+            state.error = 'payload'
         },
     },
     extraReducers: (reducerChanger) => {

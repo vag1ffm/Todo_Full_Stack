@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
@@ -6,6 +6,7 @@ import { Modal} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {RegisterationAxios} from "../../store/reducer/Authorization/axios";
+import Notification from "../notification";
 
 const Registration = () => {
 
@@ -33,6 +34,7 @@ const Registration = () => {
 
     return (
         <>
+
             <Modal.Header closeButton>
                 <Modal.Title>Sign up</Modal.Title>
             </Modal.Header>

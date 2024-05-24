@@ -13,29 +13,26 @@ class groupController {
             const {user_id} = req
 
             const user = await User.findOne({where: {id: user_id}})
-            console.log(!user)
-            console.log(!!user)
 
             if (!user) {
                 return res.status(400).json({error: "User with provided token doesn't exist"})
             }
 
             const existingGroup = await Groups.findOne({where: {group_title}})
-            console.log(!existingGroup)
+
             if (!!existingGroup) {
                 return res.status(400).json({error: "Group with provided title exist"})
             }
 
             await Groups.create({
                 group_title, group_description, group_password,
-                group_owner_name: user.username,
+                group_owner_id: user_id,
 
             })
 
             return res.status(200).json({
                 group_title,
                 group_description,
-
             })
         } catch (e) {
 
@@ -50,7 +47,7 @@ class groupController {
             const user = await User.findOne({where: {id: user_id}})
 
 
-            const groups = await Groups.findAll({where: {group_owner_name: user.username}})
+            const groups = await Groups.findAll({where: {group_owner_id: user_id}})
 
             return res.status(200).json(groups)
         } catch (e) {

@@ -15,7 +15,7 @@ const Group = sequelize.define('Group', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    group_owner_name: {
+    group_owner_id: {
         type: DataTypes.STRING,
         allowNull: false
     },

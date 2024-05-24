@@ -17,9 +17,9 @@ export const userSlice = createSlice({
         loading(state) {
             state.isLoading = true
         },
-        error(state) {
+        error(state, {payload}) {
             state.isLoading = false
-            state.error = 'Ошибка'
+            state.error = payload
         },
 
         logoutUser: () => initialState,
@@ -31,6 +31,7 @@ export const userSlice = createSlice({
 export const {
     getUserData,
     error,
-    logoutUser
+    logoutUser,
+
 } = userSlice.actions
 export default userSlice.reducer;

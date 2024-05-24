@@ -6,19 +6,19 @@ import {logDOM} from "@testing-library/react";
 
 export const CreateTodoGroupAxios = createAsyncThunk(
     "user/amirSoska",
-    (payload, {dispatch, rejectWithValue}) => {
+    async (payload, {dispatch, rejectWithValue}) => {
         try {
-
             let parameters = {
                 url: '/api/groups/',
                 payload,
             }
+            await httpClient.generalPost(parameters)
+            dispatch(statusReset())
 
-            httpClient.generalPost(parameters).then(res => {
-                dispatch(statusReset())
-            })
         } catch (e) {
-            console.log(rejectWithValue)
+            dispatch(error(e.response.data.error))
+            dispatch(statusReset())
+
         }
     }
 );
@@ -32,10 +32,11 @@ export const GetTodoGroupsAxios = createAsyncThunk(
                 payload,
             }
             httpClient.generalGet(parameters).then(res => {
+                console.log(res)
                 dispatch(getTodoGroups(res.data))
             })
         } catch (e) {
-            console.log(rejectWithValue)
+            console.log(e)
         }
     }
 );
@@ -116,7 +117,7 @@ export const DeleteTodosAxios = createAsyncThunk(
                 // dispatch(getTodos(res.data.todos))
             })
         } catch (e) {
-            console.log(rejectWithValue)
+            console.log(e)
         }
     }
 );

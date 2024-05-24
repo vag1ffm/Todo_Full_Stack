@@ -34,7 +34,6 @@ const Login = () => {
 
     const onSubmit = (data) => {
         dispatch(LoginAxios(data))
-        // Здесь можно выполнить логику отправки данных на сервер или другие действия
     };
 
 

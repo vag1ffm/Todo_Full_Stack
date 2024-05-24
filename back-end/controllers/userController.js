@@ -43,13 +43,13 @@ class UserController {
 
             const existingUser = await User.findOne({where: {username}});
             if (!existingUser) {
-                return res.status(400).json({error: 'Пользователь с таким именем уже существует'});
+                return res.status(400).json({error: 'Пользователь с таким именем не существует'});
             }
 
 
             const passwordMatch = await bcrypt.compare(password, existingUser.password);
             if (!passwordMatch) {
-                return res.status(400).json({error: 'Неверный пароль'});
+                return res.status(400).json({error: 'Не верный логин или пароль'});
             }
 
 
